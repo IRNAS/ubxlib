@@ -150,10 +150,8 @@ U_INLINE void uPortExitCritical()
     irq_unlock(gIrqLockKey);
 }
 
-static int ubxlib_preinit(const struct device *arg)
+static int ubxlib_preinit(void)
 {
-    ARG_UNUSED(arg);
-
     k_thread_system_pool_assign(k_current_get());
     return 0;
 }

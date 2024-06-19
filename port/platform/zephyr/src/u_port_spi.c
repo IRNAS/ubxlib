@@ -107,7 +107,7 @@ static int32_t setSpiConfig(uPortSpiCfg_t *pSpiCfg,
     pSpiCfg->spiConfig.operation = operation;
     pSpiCfg->spiConfig.frequency = pDevice->frequencyHertz;
 
-    pSpiCfg->spiConfig.cs = NULL;
+    pSpiCfg->spiConfig.cs = (struct spi_cs_control){0};
 #if KERNEL_VERSION_MAJOR < 3
     pSpiCfg->spiCsControl.gpio_dev = NULL;
 #else
@@ -145,7 +145,7 @@ static int32_t setSpiConfig(uPortSpiCfg_t *pSpiCfg,
                 offsetDuration = pDevice->stopOffsetNanoseconds;
             }
             pSpiCfg->spiCsControl.delay = offsetDuration / 1000;
-            pSpiCfg->spiConfig.cs = &pSpiCfg->spiCsControl;
+            pSpiCfg->spiConfig.cs = pSpiCfg->spiCsControl;
         }
     }
 
